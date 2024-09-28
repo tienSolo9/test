@@ -24,14 +24,12 @@
                         <h1><b>Create User</b></h1>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <form:input type="email" class="form-control" id="email" value="${newUser.email}"
-                                path="email" />
+                            <form:input type="email" class="form-control" id="email" path="email" />
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <form:input type="password" class="form-control" id="password" value="${newUser.email}"
-                                path="password" />
+                            <form:input type="password" class="form-control" id="password" path="password" />
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone</label>
@@ -45,7 +43,10 @@
                             <label for="address" class="form-label">Address</label>
                             <form:input type="text" class="form-control" id="address" path="address" />
                         </div>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <div>
+                            <button type="submit " class="btn btn-primary col-auto pl-1">Create</button>
+                            <a class="btn btn-success" href="/admin/user">Back</a>
+                        </div>
                     </div>
                 </form:form>
             </body>

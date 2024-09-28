@@ -17,7 +17,7 @@
         </head>
 
         <body>
-            ${newUser.email}
+            success
         </body>
 
         </html>
