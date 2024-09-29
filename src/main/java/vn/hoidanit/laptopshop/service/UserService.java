@@ -27,7 +27,7 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-    public User getUserById(Long id) {
+    public User getUserById(long id) {
         return this.userRepository.findOneById(id);
     }
 
@@ -40,5 +40,9 @@ public class UserService {
             currentUser.setAddress(user.getAddress());
         }
         return this.handleSaveUser(currentUser);
+    }
+
+    public void handleDeleteUser(Long id) {
+        this.userRepository.deleteById(id);
     }
 }
