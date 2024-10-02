@@ -26,6 +26,7 @@
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item active">Dashboard</li>
                             </ol>
+                            <h1>Product</h1>
                         </div>
                     </main>
                     <jsp:include page="../layout/footer.jsp" />
