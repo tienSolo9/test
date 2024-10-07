@@ -8253,6 +8253,8 @@ textarea.form-control-lg {
 
 .rounded {
   border-radius: var(--bs-border-radius) !important;
+  border-color: #ffb524 !important;
+  border: 2px solid;
 }
 
 .rounded-0 {

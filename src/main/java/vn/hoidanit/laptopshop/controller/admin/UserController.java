@@ -1,7 +1,11 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,23 +15,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.ServletContext;
+import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
+import vn.hoidanit.laptopshop.service.UploadFileService;
 import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 
 public class UserController {
-    UserService userService;
+    private final UserService userService;
+    private final UploadFileService uploadFileService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+            UploadFileService uploadFileService) {
         this.userService = userService;
-    }
+        this.uploadFileService = uploadFileService;
 
-    @GetMapping()
-    public String HelloUser(Model model) {
-        return "index";
     }
 
     @GetMapping("/admin/user")
@@ -53,8 +61,11 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String handleCreateUser(Model model, @ModelAttribute("newUser") User newUser) {
-        userService.handleSaveUser(newUser);
+    public String handleCreateUser(Model model,
+            @ModelAttribute("newUser") User newUser,
+            @RequestParam("hoidanitFile") MultipartFile file) {
+
+        userService.handleCreateUser(newUser, file);
         return "redirect:/admin/user";
     }
 
@@ -62,15 +73,16 @@ public class UserController {
     @GetMapping("/admin/user/update/{id}")
     public String getUpdateUser(Model model, @PathVariable Long id) {
         User user = userService.getUserById(id);
-        System.out.println(user);
         model.addAttribute("user", user);
         return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
-    public String handleUpdateUser(Model model, @ModelAttribute("user") User user) {
-        User currentUser = userService.handleUpdateUser(user);
-        System.out.println(currentUser);
+    public String handleUpdateUser(Model model,
+            @ModelAttribute("user") User user,
+            @RequestParam("avatarFile") MultipartFile file) {
+
+        userService.handleUpdateUser(user, file);
         return "redirect:/admin/user";
     }
 
@@ -83,7 +95,7 @@ public class UserController {
 
     @PostMapping("/admin/user/delete")
     public String postMethodName(@ModelAttribute("user") User user) {
-        userService.handleDeleteUser(user.getId());
+        // userService.handleDeleteUser(user.getId());
         return "redirect:/admin/user";
     }
 
