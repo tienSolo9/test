@@ -25,7 +25,7 @@
                         <div class="container-fluid px-4">
                             <h1 class="mt-4">Dashboard</h1>
                             <div class="row col-12 mt-5"></div>
-                            <div class="head d-flex justify-content-between p-0">
+                            <div class="head d-flex justify-content-between align-items-center p-0">
                                 <h2 class="">Table Users</h2>
                                 <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
                             </div>

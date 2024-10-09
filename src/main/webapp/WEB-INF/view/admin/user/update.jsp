@@ -45,8 +45,7 @@
                                         </div>
                                         <div class="mb-3 col-12 col-md-6">
                                             <label for="email" class="form-label">Email</label>
-                                            <form:input type="email" class="form-control" id="email" path="email"
-                                                disabled="true" />
+                                            <form:input type="email" class="form-control" id="email" path="email" />
                                         </div>
 
                                         <div class="mb-3 col-12 col-md-6">
@@ -54,8 +53,14 @@
                                             <form:input type="text" class="form-control" id="phone" path="phone" />
                                         </div>
                                         <div class="mb-3">
+                                            <c:set var="errorFullName">
+                                                <form:errors path="fullName" />
+                                            </c:set>
                                             <label for="name" class="form-label">Fullname</label>
-                                            <form:input type="text" class="form-control" id="name" path="fullName" />
+                                            <form:input type="text"
+                                                class="form-control ${not empty errorFullName?'is-invalid':''}"
+                                                id="name" path="fullName" />
+                                            <form:errors path="fullName" cssClass="invalid-feedback" />
                                         </div>
                                         <div class="mb-3">
                                             <label for="address" class="form-label">Address</label>

@@ -60,7 +60,9 @@ public class UserService {
             currentUser.setPhone(user.getPhone());
             currentUser.setFullName(user.getFullName());
             currentUser.setAddress(user.getAddress());
-            currentUser.setAvatar(this.uploadFileService.handleSaveFile(file, "avatar"));
+            if (!file.getOriginalFilename().equals("")) {
+                currentUser.setAvatar(this.uploadFileService.handleSaveFile(file, "avatar"));
+            }
         }
         return this.handleSaveUser(currentUser);
     }

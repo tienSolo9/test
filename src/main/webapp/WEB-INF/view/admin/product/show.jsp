@@ -22,11 +22,37 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Dashboard</h1>
+                            <h1 class="mt-5">Manage Product</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">product</li>
                             </ol>
-                            <h1>Product</h1>
+
+                            <div class="d-flex justify-content-between align-items-center p-0">
+                                <h2 class="col-6">Table Product</h2>
+                                <a class="btn btn-primary" href="/admin/product/create">Create Product</a>
+                            </div>
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Id
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th>
+                                            Factory
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
                     </main>
                     <jsp:include page="../layout/footer.jsp" />

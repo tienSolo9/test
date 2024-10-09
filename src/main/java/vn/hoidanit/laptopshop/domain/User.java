@@ -8,6 +8,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.*;
 
 @Entity
@@ -16,10 +22,21 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String phone;
+
+    @NotNull
+    @Size(message = "full name must be greater than 3 letter", min = 3)
     private String fullName;
+
+    // @Email(message = "Email is not valid", regexp =
+    // "^[a-z0-9_!#$%&'*+/=?`{|}~^.-]+@[az0-9.-]+$")
+    @NotEmpty
     private String email;
+
+    @NotNull
+    @Size(message = "password must be greater than 3 letter", min = 3)
     private String password;
+
+    private String phone;
     private String address;
 
     private String avatar;

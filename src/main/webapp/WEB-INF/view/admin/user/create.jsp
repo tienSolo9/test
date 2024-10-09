@@ -43,22 +43,41 @@
                                         <h1><b>Create User</b></h1>
                                         <hr>
                                         <div class="mb-3 col-6">
+                                            <c:set var="emailError">
+                                                <form:errors path="email" />
+                                            </c:set>
+
                                             <label for="email" class="form-label">Email</label>
-                                            <form:input type="email" class="form-control" id="email" path="email" />
+                                            <form:input type="email"
+                                                class="form-control ${not empty emailError?'is-invalid':''}" id="email"
+                                                path="email" />
+                                            <form:errors path="email" cssClass="invalid-feedback" />
+
                                         </div>
 
                                         <div class="mb-3 col-6">
+                                            <c:set var="errorPassword">
+                                                <form:errors path="password" />
+                                            </c:set>
                                             <label for="password" class="form-label">Password</label>
-                                            <form:input type="password" class="form-control" id="password"
-                                                path="password" />
+                                            <form:input type="password"
+                                                class="form-control ${not empty errorPassword?'is-invalid':'is-valid'}"
+                                                id="password" path="password" />
+                                            <form:errors path="password" cssClass="invalid-feedback" />
                                         </div>
                                         <div class="mb-3 col-6">
                                             <label for="phone" class="form-label">Phone</label>
                                             <form:input type="text" class="form-control" id="phone" path="phone" />
                                         </div>
                                         <div class="mb-3 col-6">
-                                            <label for="name" class="form-label">Fullname</label>
-                                            <form:input type="text" class="form-control" id="name" path="fullName" />
+                                            <c:set var="errorFullName">
+                                                <form:errors path="fullName" />
+                                            </c:set>
+                                            <label for="name" class="form-label">Full name</label>
+                                            <form:input type="text"
+                                                class="form-control ${not empty errorFullName?'is-invalid':''}"
+                                                id="name" path="fullName" />
+                                            <form:errors path="fullName" cssClass="invalid-feedback" />
                                         </div>
                                         <div class="mb-3 col-12">
                                             <label for="address" class="form-label">Address</label>
