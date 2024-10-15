@@ -31,7 +31,6 @@
 
 
                             <button type="submit" class="btn btn-danger">Xóa</button>
-                            <a class="btn btn-success" href="/admin/user">Back</a>
                         </form:form>
 
                     </div>

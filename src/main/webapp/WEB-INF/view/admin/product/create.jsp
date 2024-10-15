@@ -43,45 +43,75 @@
                                     <li class="breadcrumb-item active">product</li>
                                 </ol>
                             </div>
+
                             <form:form action="/admin/product/create" method="POST" modelAttribute="newProduct"
                                 enctype="multipart/form-data">
+                                <c:set var="eName">
+                                    <form:errors path="name" />
+                                </c:set>
+                                <c:set var="pName">
+                                    <form:errors path="price" />
+                                </c:set>
+                                <c:set var="dName">
+                                    <form:errors path="detailDesc" />
+                                </c:set>
+                                <c:set var="sName">
+                                    <form:errors path="shortDesc" />
+                                </c:set>
                                 <div class="row mx-auto col-md-6">
                                     <h1><b>Create User</b></h1>
                                     <hr>
                                     <div class="mb-3 col-6">
+
                                         <label for="nameP" class="form-label">Name</label>
-                                        <form:input class="form-control" path="name" />
+                                        <form:input class="form-control ${not empty eName?'is-invalid':''}"
+                                            path="name" />
+                                        <form:errors path="name" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-6">
+
                                         <label for="" class="form-label">Price</label>
-                                        <form:input class="form-control" type="number" path="price" />
+                                        <form:input class="form-control ${not empty pName?'is-invalid':''}"
+                                            type="number" step="any" path="price" />
+                                        <form:errors path="price" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-12">
+
                                         <label for="" class="form-label">Detail Description</label>
-                                        <textarea class="form-control" rows="3" path="detailDesc" name="detailDesc"
+                                        <textarea class="form-control ${not empty dName?'is-invalid':''}" rows="3"
+                                            path="detailDesc" name="detailDesc"
                                             value="${newProduct.detailDesc}"></textarea>
+                                        <form:errors path="detailDesc" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-6">
+
                                         <label for="nameP" class="form-label">Short description</label>
-                                        <form:input class="form-control" path="shortDesc" />
+                                        <form:input class="form-control ${not empty sName?'is-invalid':''}"
+                                            path="shortDesc" />
+                                        <form:errors path="shortDesc" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-6">
+                                        <c:set var="qName">
+                                            <form:errors path="quantity" />
+                                        </c:set>
                                         <label for="" class="form-label">Quantity</label>
-                                        <form:input class="form-control" type="number" path="quantity" />
+                                        <form:input class="form-control ${not empty qName?'is-invalid':''}"
+                                            type="number" path="quantity" />
+                                        <form:errors path="quantity" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-6">
                                         <label for="" class="form-label">Factory</label>
                                         <form:select class="form-select" path="factory">
-                                            <form:option value="1">Apple</form:option>
-                                            <form:option value="2">samsung</form:option>
+                                            <form:option value="apple">Apple</form:option>
+                                            <form:option value="samsung">samsung</form:option>
                                         </form:select>
                                     </div>
 
                                     <div class="mb-3 col-6">
                                         <label for="" class="form-label">Target</label>
-                                        <form:select class="form-select" path="factory">
-                                            <form:option value="1">Gaming</form:option>
-                                            <form:option value="2">Office</form:option>
+                                        <form:select class="form-select" path="target">
+                                            <form:option value="gaming">Gaming</form:option>
+                                            <form:option value="office">Office</form:option>
                                         </form:select>
                                     </div>
                                     <div class="col-6 mb-3">

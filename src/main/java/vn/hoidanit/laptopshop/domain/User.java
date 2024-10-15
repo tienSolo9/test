@@ -23,7 +23,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     @Size(message = "full name must be greater than 3 letter", min = 3)
     private String fullName;
 
@@ -32,7 +31,6 @@ public class User {
     @NotEmpty
     private String email;
 
-    @NotNull
     @Size(message = "password must be greater than 3 letter", min = 3)
     private String password;
 

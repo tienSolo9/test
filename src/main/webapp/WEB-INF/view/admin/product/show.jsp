@@ -52,6 +52,23 @@
                                         </th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <c:forEach var="it" items="${products}">
+                                        <tr>
+                                            <td>${it.id}</td>
+                                            <td>${it.name}</td>
+                                            <td>${it.price}</td>
+                                            <td>${it.factory}</td>
+                                            <td>
+                                                <a href="/admin/product/${it.id}" class="btn btn-success">View</a>
+                                                <a href="/admin/product/update/${it.id}"
+                                                    class="btn btn-warning">Update</a>
+                                                <a href="/admin/product/delete/${it.id}"
+                                                    class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
                             </table>
                         </div>
                     </main>
@@ -61,7 +78,6 @@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                 crossorigin="anonymous"></script>
-            <script src="js/scripts.js"></script>
         </body>
 
         </html>
