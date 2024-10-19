@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
+import vn.hoidanit.laptopshop.DTO.RegisterDTO;
 import vn.hoidanit.laptopshop.domain.Role;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.RoleRepository;
@@ -81,5 +82,25 @@ public class UserService {
         String passWordEncoded = passwordEncoder.encode(user.getPassword());
         user.setPassword(passWordEncoded);
         return user;
+    }
+
+    public User RegisterDtoToUser(RegisterDTO register) {
+        User user = new User();
+
+        user.setFullName(register.getFirstName() + " " + register.getLastName());
+        user.setEmail(register.getEmail());
+        user.setPassword(register.getPassword());
+        user = this.handlePassword(user);
+        user = this.handleShowRole("user", user);
+        return user;
+    }
+
+    public void handleRegister(RegisterDTO registerDTO) {
+        User user = this.RegisterDtoToUser(registerDTO);
+        this.handleSaveUser(user);
+    }
+
+    public boolean checkEmailExists(String email) {
+        return userRepository.existsByEmail(email);
     }
 }

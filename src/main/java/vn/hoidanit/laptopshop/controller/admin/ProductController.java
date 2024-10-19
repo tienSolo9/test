@@ -50,6 +50,12 @@ public class ProductController {
         return "admin/product/update";
     }
 
+    @GetMapping("/admin/product/create")
+    public String getProductUpdatePage(Model model) {
+        model.addAttribute("newProduct", new Product());
+        return "admin/product/create";
+    }
+
     @PostMapping("/admin/product/create")
     public String handleCreate(Model model,
             @ModelAttribute("newProduct") @Valid Product newProduct,
@@ -81,7 +87,8 @@ public class ProductController {
         }
 
         if (bindingResult.hasErrors()) {
-            return "admin/product/create";
+            productDetail.setImage(productService.findProductById(productDetail.getId()).getImage());
+            return "admin/product/update";
         }
 
         productService.handleUpdate(file, productDetail);

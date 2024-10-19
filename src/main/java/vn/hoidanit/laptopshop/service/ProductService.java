@@ -1,5 +1,7 @@
 package vn.hoidanit.laptopshop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,9 +19,15 @@ public class ProductService {
     }
 
     public void handleCreate(MultipartFile file, Product product) {
-        String image = uploadFileService.handleSaveFile(file, "laptop");
-        product.setImage(image);
+        if (!file.getOriginalFilename().equals("")) {
+            String image = uploadFileService.handleSaveFile(file, "laptop");
+            product.setImage(image);
+        }
         productRepository.save(product);
+    }
+
+    public List<Product> fetchProducts() {
+        return productRepository.findAll();
     }
 
     public Product findProductById(long id) {
@@ -27,8 +35,13 @@ public class ProductService {
     }
 
     public void handleUpdate(MultipartFile file, Product product) {
-        String image = uploadFileService.handleSaveFile(file, "laptop");
-        product.setImage(image);
+        Product temProduct = productRepository.findOneById(product.getId());
+        if (!file.getOriginalFilename().equals("")) {
+            String image = uploadFileService.handleSaveFile(file, "laptop");
+            product.setImage(image);
+        } else {
+            product.setImage(temProduct.getImage());
+        }
         productRepository.save(product);
     }
 
