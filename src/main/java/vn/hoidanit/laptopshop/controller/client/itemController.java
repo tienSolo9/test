@@ -2,6 +2,8 @@ package vn.hoidanit.laptopshop.controller.client;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +18,10 @@ import vn.hoidanit.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class itemController {
@@ -58,6 +63,11 @@ public class itemController {
     public String getLoginPage(Model model) {
         model.addAttribute("registerDTO", new RegisterDTO());
         return "client/auth/login";
+    }
+
+    @GetMapping("/accessDeny")
+    public String getMethodName() {
+        return "client/auth/accessDeny";
     }
 
 }
