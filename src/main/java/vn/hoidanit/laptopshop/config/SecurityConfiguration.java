@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 import jakarta.servlet.DispatcherType;
 import vn.hoidanit.laptopshop.repository.UserRepository;
 import vn.hoidanit.laptopshop.service.CustomUserDetailsService;
+import vn.hoidanit.laptopshop.service.UserService;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)

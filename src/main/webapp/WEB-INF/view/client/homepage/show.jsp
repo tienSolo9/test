@@ -28,7 +28,6 @@
                 <!-- Template Stylesheet -->
                 <link href="/client/css/style.css" rel="stylesheet">
             </head>
-            /client/
 
             <body>
 
@@ -77,7 +76,7 @@
                                         <c:forEach var="product" items="${products}">
                                             <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
                                                 <div class="rounded position-relative fruite-item custome">
-                                                    <a href="/detail/${product.id}">
+                                                    <div>
                                                         <div class="fruite-img">
                                                             <img src="/images/laptop/${product.image}"
                                                                 class="img-fluid w-100 rounded-top" alt="">
@@ -86,21 +85,33 @@
                                                             style="top: 10px; left: 10px;">Laptop</div>
                                                         <div
                                                             class="p-4 border border-secondary border-top-0 rounded-bottom custome-2">
-                                                            <h4 style="height: 70px;">${product.name}</h4>
+                                                            <h4 style="height: 70px;">
+                                                                <a href="/detail/${product.id}">
+                                                                    ${product.name}
+                                                                </a>
+                                                            </h4>
                                                             <p>${product.shortDesc}</p>
                                                             <div class="">
                                                                 <p class="text-dark fs-5 fw-bold mb-3">
                                                                     <fmt:formatNumber type="number"
                                                                         value="${product.price}" />
                                                                 </p>
-                                                                <a href="#"
-                                                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                    Add to
-                                                                    cart</a>
+                                                                <form action="/add-product-to-cart/${product.id}"
+                                                                    method="post">
+                                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                                        value="${_csrf.token}" />
+                                                                    <button type="submit"
+                                                                        class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                                        <i
+                                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                        Add to
+                                                                        cart
+                                                                    </button>
+                                                                </form>
+
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    </div>
 
                                                 </div>
                                             </div>

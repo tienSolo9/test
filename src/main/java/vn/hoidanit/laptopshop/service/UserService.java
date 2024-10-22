@@ -4,6 +4,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import java.util.*;
 
 import vn.hoidanit.laptopshop.DTO.RegisterDTO;
@@ -54,7 +57,7 @@ public class UserService {
         return newUser;
     }
 
-    public User handleUpdateUser(User user, MultipartFile file) {
+    public User handleUpdateUser(User user, MultipartFile file, HttpServletRequest request) {
         User currentUser = this.getUserById(user.getId());
 
         if (currentUser != null) {
@@ -63,6 +66,8 @@ public class UserService {
             currentUser.setAddress(user.getAddress());
             if (!file.getOriginalFilename().equals("")) {
                 currentUser.setAvatar(this.uploadFileService.handleSaveFile(file, "avatar"));
+                HttpSession session = request.getSession(false);
+                session.setAttribute("avatar", currentUser.getAvatar());
             }
         }
         return this.handleSaveUser(currentUser);

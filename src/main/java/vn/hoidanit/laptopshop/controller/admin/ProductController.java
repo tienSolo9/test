@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.repository.ProductRepository;
@@ -106,6 +108,20 @@ public class ProductController {
     public String handleDelete(@ModelAttribute("productDetail") Product product) {
         productService.handleDelete(product.getId());
         return "redirect:/admin/product";
+    }
+
+    @GetMapping("/cart")
+    public String getCart() {
+
+        return "client/cart/show";
+    }
+
+    @PostMapping("/add-product-to-cart/{id}")
+    public String addProductToCard(@PathVariable long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String email = (String) session.getAttribute("email");
+        productService.handleAddProductToCart(id, email, session);
+        return "redirect:/";
     }
 
 }

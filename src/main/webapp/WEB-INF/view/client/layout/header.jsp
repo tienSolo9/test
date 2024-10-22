@@ -1,7 +1,8 @@
 <!-- Navbar start -->
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <div class="container-fluid fixed-top">
+
+        <div class="container-fluid fixed-top" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
                     <a href="/" class="navbar-brand">
@@ -26,6 +27,12 @@
                         </a>
                     </c:if>
                     <c:if test="${not empty pageContext.request.userPrincipal}">
+                        <a href="#" class="position-relative me-4 my-auto">
+                            <i class="fa fa-shopping-bag fa-2x"></i>
+                            <span
+                                class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">${sessionScope.sum}</span>
+                        </a>
                         <div class="dropdown my-auto">
                             <a href="#" class="dropdown" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                                 aria-expanded="false" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,7 +41,7 @@
                             <ul class="dropdown-menu dropdown-menu-end p-4" arialabelledby="dropdownMenuLink">
                                 <li class="d-flex align-items-center flex-column" style="min-width: 300px;">
                                     <img style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;"
-                                        src="" />
+                                        src="/images/avatar/${avatar}" />
                                     <div class="text-center my-3">
                                         <c:out value="${pageContext.request.userPrincipal.name}" />
                                     </div>
@@ -59,5 +66,5 @@
             </div>
             </nav>
         </div>
-        </div>
+
         <!-- Navbar End -->

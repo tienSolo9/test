@@ -52,6 +52,25 @@ public class Product {
     @OneToMany(mappedBy = "product")
     List<OrderDetail> orderDetails;
 
+    @OneToMany(mappedBy = "product")
+    List<CartDetail> cartDetails;
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public List<CartDetail> getCartDetails() {
+        return cartDetails;
+    }
+
+    public void setCartDetails(List<CartDetail> cartDetails) {
+        this.cartDetails = cartDetails;
+    }
+
     public long getId() {
         return id;
     }
