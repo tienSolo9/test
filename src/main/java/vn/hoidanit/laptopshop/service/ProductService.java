@@ -1,12 +1,13 @@
 package vn.hoidanit.laptopshop.service;
 
 import java.util.List;
-
+import java.util.*;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
+import vn.hoidanit.laptopshop.DTO.CartDTO;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
@@ -67,8 +68,8 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public void handleAddProductToCart(long productId, String email, HttpSession session) {
-
+    public void handleAddProductToCart(long productId, HttpSession session) {
+        String email = (String) session.getAttribute("email");
         User user = this.userRepository.findByEmail(email);
 
         if (user != null) {
@@ -106,6 +107,9 @@ public class ProductService {
             // them moi gio hang
 
         }
+    }
 
+    public Cart getCartByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 }

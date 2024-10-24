@@ -14,8 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import vn.hoidanit.laptopshop.DTO.CartDTO;
+import vn.hoidanit.laptopshop.domain.Cart;
+import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
+import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.ProductRepository;
+import vn.hoidanit.laptopshop.repository.UserRepository;
 import vn.hoidanit.laptopshop.service.ProductService;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +34,9 @@ public class ProductController {
     private ProductRepository productRepository;
     private ProductService productService;
 
-    public ProductController(ProductRepository productRepository, ProductService productService) {
+    public ProductController(ProductRepository productRepository,
+            ProductService productService,
+            UserRepository userRepository) {
         this.productRepository = productRepository;
         this.productService = productService;
     }
@@ -111,16 +118,33 @@ public class ProductController {
     }
 
     @GetMapping("/cart")
-    public String getCart() {
+    public String getCart(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
 
+        long id = (long) session.getAttribute("id");
+        User user = new User();
+        user.setId(id);
+
+        // tim cart by user -> chi can set id cho user thi hibernate se tu dung join
+        // table dua tren id
+
+        Cart cart = this.productService.getCartByUser(user);
+
+        List<CartDetail> cartDetails = cart == null ? new ArrayList<>() : cart.getCartDetails();
+
+        double totalCart = 0;
+        for (CartDetail it : cartDetails) {
+            totalCart += it.getPrice() * it.getQuantity();
+        }
+        model.addAttribute("carts", cartDetails);
+        model.addAttribute("totalCart", totalCart);
         return "client/cart/show";
     }
 
     @PostMapping("/add-product-to-cart/{id}")
     public String addProductToCard(@PathVariable long id, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        String email = (String) session.getAttribute("email");
-        productService.handleAddProductToCart(id, email, session);
+        productService.handleAddProductToCart(id, session);
         return "redirect:/";
     }
 
